@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hennyssy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --apricot:#ffd9a8;
+    --pink:#ffb8c6;
+    --orange:#ff9d5c;
+    --cream:#fff4e8;
+    --ink:#3a2218;
+    --ink-soft:#6b4632;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Fraunces',Georgia,serif;
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+    line-height:1.5;
+  }
+  /* organic wave backdrop */
+  .bg{
+    position:fixed;inset:0;z-index:-1;
+    background:var(--cream);
+    overflow:hidden;
+  }
+  .bg svg{position:absolute;left:0;width:200%;height:auto}
+  .wave1{bottom:-4%;opacity:.5;animation:roll1 28s ease-in-out infinite}
+  .wave2{bottom:-2%;opacity:.42;animation:roll2 38s ease-in-out infinite}
+  .wave3{bottom:0;opacity:.6;animation:roll3 22s ease-in-out infinite}
+  .wave4{top:-6%;opacity:.34;animation:roll2 46s ease-in-out infinite reverse}
+  @keyframes roll1{0%,100%{transform:translateX(0) translateY(0)}50%{transform:translateX(-14%) translateY(-2.2%)}}
+  @keyframes roll2{0%,100%{transform:translateX(-10%) translateY(0)}50%{transform:translateX(0) translateY(2%)}}
+  @keyframes roll3{0%,100%{transform:translateX(-6%) translateY(1%)}50%{transform:translateX(-20%) translateY(-1.4%)}}
+  .mono{font-family:'Space Mono',monospace}
+  section{
+    max-width:680px;margin:0 auto;padding:14vh 28px;
+    position:relative;
+  }
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---- TAPE / PLAY ---- */
+  .hero{padding-top:16vh;text-align:center}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    text-transform:uppercase;letter-spacing:.34em;
+    font-size:.72rem;color:var(--ink-soft);margin-bottom:26px;
+  }
+  .tape{
+    width:300px;max-width:84vw;margin:0 auto 8px;
+    background:var(--ink);
+    border-radius:14px;
+    padding:20px 20px 16px;
+    color:var(--cream);
+    box-shadow:0 18px 40px rgba(58,34,24,.32);
+    position:relative;
+    animation:bob 5s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+  .tape-label{
+    background:var(--cream);color:var(--ink);
+    border-radius:5px;padding:12px 10px;text-align:center;
+  }
+  .tape-label .t{font-size:1.18rem;font-weight:600;font-style:italic}
+  .tape-label .s{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:3px}
+  .reels{display:flex;justify-content:space-around;margin-top:14px;padding:0 8px}
+  .reel{
+    width:46px;height:46px;border-radius:50%;
+    border:3px solid var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    animation:spin 3.2s linear infinite;
+  }
+  .reel::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--cream)}
+  .reel::after{content:"";position:absolute;width:30px;height:30px;border-radius:50%;border:2px dashed var(--cream);opacity:.5}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .prompt{
+    font-family:'Space Mono',monospace;font-size:.78rem;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--ink);
+    margin:22px 0 16px;animation:pulse 2.1s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+  .player{max-width:84vw;width:300px;margin:0 auto}
+  iframe{border-radius:12px;display:block;width:100%}
+
+  /* ---- HEADLINE ---- */
+  h1{
+    font-size:clamp(3.4rem,15vw,6.4rem);
+    font-weight:300;line-height:.92;letter-spacing:-.02em;
+    margin:0;
+  }
+  h1 em{font-style:italic;font-weight:500}
+  .sub{
+    font-family:'Space Mono',monospace;font-size:.82rem;
+    color:var(--ink-soft);margin-top:20px;line-height:1.7;
+  }
+
+  /* ---- PHOTO BLOCKS ---- */
+  figure{margin:0}
+  .frame{
+    position:relative;border-radius:10px;overflow:hidden;
+    box-shadow:0 16px 38px rgba(58,34,24,.28);
+  }
+  .frame img{width:100%;display:block}
+  .overlay{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:22px 20px 18px;
+    background:linear-gradient(transparent,rgba(58,34,24,.82));
+    color:var(--cream);
+    font-style:italic;font-size:1.05rem;line-height:1.35;
+  }
+  figcaption{
+    margin-top:16px;color:var(--ink-soft);
+    font-size:1.06rem;line-height:1.5;
+  }
+  figcaption b{color:var(--ink);font-weight:500}
+  .label{
+    font-family:'Space Mono',monospace;font-size:.66rem;
+    letter-spacing:.26em;text-transform:uppercase;color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:520px){.two{grid-template-columns:1fr}}
+
+  /* ---- CLOSE ---- */
+  .close{text-align:center;padding-bottom:22vh}
+  .close .big{
+    font-size:clamp(2rem,8vw,3.2rem);font-weight:300;
+    font-style:italic;line-height:1.1;
+  }
+  .close .mono{display:block;margin-top:24px;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <svg class="wave4" viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#ffb8c6" d="M0,160 C240,80 480,240 720,160 C960,80 1200,240 1440,160 L1440,0 L0,0 Z"/></svg>
+  <svg class="wave2" viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#ff9d5c" d="M0,224 C200,150 420,300 720,224 C1020,150 1240,300 1440,224 L1440,320 L0,320 Z"/></svg>
+  <svg class="wave1" viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#ffd9a8" d="M0,192 C260,260 520,120 760,192 C1000,264 1220,140 1440,200 L1440,320 L0,320 Z"/></svg>
+  <svg class="wave3" viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#ffb8c6" d="M0,256 C220,200 480,300 720,256 C960,212 1200,300 1440,256 L1440,320 L0,320 Z"/></svg>
+</div>
+
+<!-- 1. PRESS PLAY -->
+<section class="hero">
+  <p class="eyebrow">do this first</p>
+  <div class="tape">
+    <div class="tape-label">
+      <div class="t">Hennessy &amp; Buddha</div>
+      <div class="s">for Hennyssy · side A</div>
+    </div>
+    <div class="reels"><span class="reel"></span><span class="reel"></span></div>
+  </div>
+  <p class="prompt">▶ press play</p>
+  <div class="player">
+    <iframe src="https://open.spotify.com/embed/track/6dqE95KU5yVcqDkgEt3TIm?utm_source=generator&theme=0"
+      width="100%" height="152" frameborder="0" allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- 2. HEADLINE -->
+<section class="reveal">
+  <h1>This is a website<br>about <em>Henny</em>.</h1>
+  <p class="sub">There is no other Henny. We checked the others. They were worse.<br>This page is yours. Keep scrolling.</p>
+</section>
+
+<!-- 3. BUCKET MAN -->
+<section class="reveal">
+  <p class="label">exhibit, unrelated</p>
+  <figure>
+    <div class="frame">
+      <img src="IMG_2475.jpeg" alt="A man putting a yellow bucket on his head in front of a baby">
+      <figcaption class="overlay">Satt skräck i gubbar och borgare sen dag ett. Henny Halldin — snabbast och smartast av alla.</figcaption>
+    </div>
+  </figure>
+</section>
+
+<!-- 4. ORIGIN -->
+<section class="reveal">
+  <p class="label">the early work</p>
+  <figure>
+    <div class="frame"><img src="IMG_0046.jpeg" alt="Toddler Henny in a blue dress"></div>
+    <figcaption>Blue dress. Already unimpressed. The boy to your right is having the worst day of his life and you are simply <b>standing there, enduring it</b> — a skill you would go on to use for the next eighteen years of school.</figcaption>
+  </figure>
+</section>
+
+<!-- 5. GLOW UP -->
+<section class="reveal">
+  <p class="label">and then, somehow</p>
+  <figure class="two">
+    <div class="frame"><img src="IMG_2478.jpeg" alt="Henny in a black turtleneck"></div>
+    <div class="frame"><img src="IMG_2477.jpeg" alt="Henny, selfie"></div>
+  </figure>
+  <figcaption>The same person. We checked. No notes.</figcaption>
+</section>
+
+<!-- 6. THE MOMENT -->
+<section class="reveal">
+  <p class="label">the actual point</p>
+  <figure>
+    <div class="frame"><img src="IMG_2476.jpeg" alt="Henny on graduation day, captain's cap and medals"></div>
+    <figcaption>Cap, medals, flowers you can't possibly carry, a sign with your face on it. The bit is over now. You did the whole thing, the long boring impossible thing, and you did it well — and watching you cross that line was the easiest thing in the world to be proud of. <b>Fy fan vad du är bra!</b></figcaption>
+  </figure>
+</section>
+
+<!-- 7. CLOSE -->
+<section class="close reveal">
+  <p class="big">Anyway. You're done.<br>Nobody can make you read anything ever again.</p>
+  <span class="mono">use this power carefully · now go play the song</span>
+</section>
+
+<script>
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+  },{threshold:0.18});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
